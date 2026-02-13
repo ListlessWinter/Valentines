@@ -57,6 +57,30 @@
             </div>
         </div>
 
+        <!-- Present 2: Interactive Envelope -->
+        <div id="present-2-container" class="hidden">
+            <div class="envelope-wrapper">
+                <div class="envelope">
+                    <div class="back"></div>
+                    <div class="letter">
+                        <div class="text">
+                            <strong>Dear Valentine,</strong>
+                            <p>
+                                You are the CSS to my HTML, the JS to my interactive heart. <br>
+                                I choose you. ❤️
+                            </p>
+                        </div>
+                    </div>
+                    <div class="left-flap"></div>
+                    <div class="right-flap"></div>
+                    <div class="bottom-flap"></div>
+                    <div class="top-flap"></div>
+                    <div class="shadow"></div>
+                </div>
+            </div>
+            <button class="back-btn" onclick="goBackToPresents()">⬅ Choose Another Gift</button>
+        </div>
+
         <!-- Hidden SVG Definitions -->
         <svg width="0" height="0" style="position:absolute;">
             <defs>
@@ -108,6 +132,7 @@
                     Your browser does not support the video tag.
                 </video>
             </div>
+            <button class="back-btn" onclick="goBackToPresents()">⬅ Choose Another Gift</button>
             <!-- Constructed SVG Rose Frame (Reliable) -->
             <div class="rose-frame-container">
                 <!-- Define the Rose SVG once -->

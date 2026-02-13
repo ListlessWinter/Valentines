@@ -84,15 +84,59 @@ present1.addEventListener('click', () => {
 });
 
 present2.addEventListener('click', () => {
-    alert("This one is empty... try another! 🎁");
+    // Show Envelope Present
+    document.getElementById('presents-container').classList.add('hidden');
+    document.getElementById('present-2-container').classList.remove('hidden');
+});
+
+// Envelope Interaction
+const envelope = document.querySelector('.envelope');
+envelope.addEventListener('click', () => {
+    envelope.classList.toggle('open');
 });
 
 present3.addEventListener('click', () => {
     alert("Nope, not this one! 😉");
 });
 
+// Global Back Function
+window.goBackToPresents = function () {
+    // Hide all possible views
+    const successContainer = document.getElementById('success-container');
+    const present2Container = document.getElementById('present-2-container');
+    const presentsContainer = document.getElementById('presents-container');
+
+    successContainer.classList.add('hidden');
+    present2Container.classList.add('hidden');
+    presentsContainer.classList.remove('hidden');
+
+    // Reset Success State
+    document.querySelector('.container').classList.remove('burning');
+
+    // Stop Video
+    const successVideo = document.getElementById('success-video');
+    successVideo.pause();
+    successVideo.currentTime = 0;
+
+    // Stop Confetti/Petals (Optional: clear confetti canvas if needed, but not strictly required)
+    // Clear Petal Interval if accessible, ideally store it in a variable
+    // For now, simpler reset: reload page? No, better to just hide.
+    // To truly stop petals, we need the interval ID.
+    // Let's modify createPetals to save the interval ID.
+    if (window.petalInterval) {
+        clearInterval(window.petalInterval);
+        document.querySelectorAll('.petal').forEach(p => p.remove());
+    }
+
+    // Reset Envelope
+    envelope.classList.remove('open');
+};
+
 function createPetals() {
-    setInterval(() => {
+    // Clear any existing interval to prevent duplicates
+    if (window.petalInterval) clearInterval(window.petalInterval);
+
+    window.petalInterval = setInterval(() => {
         const petal = document.createElement('div');
         petal.classList.add('petal');
 
