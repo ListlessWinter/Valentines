@@ -1,0 +1,329 @@
+/* Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+    background-color: #ffe6e6;
+    /* Fallback */
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ff9a9e' fill-opacity='0.2'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    font-family: 'Nunito', sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    transition: background 1s ease;
+}
+
+/* Success Background */
+body.success-bg {
+    background: #0b152f !important;
+    background-image: none !important;
+}
+
+/* Ensure text is readable on dark background */
+body.success-bg h1,
+body.success-bg p {
+    color: #ffcccc;
+    text-shadow: 0 0 10px rgba(255, 100, 100, 0.5);
+}
+
+.container {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 3rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(255, 105, 135, 0.3);
+    border: 2px solid #ffdde1;
+    max-width: 90%;
+    width: 500px;
+    position: relative;
+    z-index: 10;
+    transition: background 0.5s, box-shadow 0.5s;
+}
+
+/* Container transparency on success for cooler effect */
+body.success-bg .container {
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 30px rgba(255, 75, 110, 0.6);
+    border-color: rgba(255, 75, 110, 0.5);
+    backdrop-filter: blur(5px);
+}
+
+h1 {
+    font-family: 'Pacifico', cursive;
+    color: #ff4b6e;
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.05);
+}
+
+.gif-container {
+    margin-bottom: 2rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cute-gif {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 10px;
+}
+
+.video-container {
+    margin-bottom: 2rem;
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+video {
+    width: 100%;
+    max-height: 300px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Buttons */
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    position: relative;
+    /* For the 'No' button absolute positioning context if needed, though we usually use body */
+}
+
+button {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    outline: none;
+}
+
+#yes-btn {
+    background-color: #ff4b6e;
+    color: white;
+    box-shadow: 0 4px 15px rgba(255, 75, 110, 0.4);
+    z-index: 100;
+    /* Ensure it stays on top when growing */
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    /* Bouncy growth */
+}
+
+#yes-btn:hover {
+    /* Handle hover scale separately in JS or just let JS override transform */
+    background-color: #ff335a;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 600px) {
+    .container {
+        padding: 2rem;
+        width: 100%;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    .gif-container {
+        height: 150px;
+    }
+
+    button {
+        padding: 10px 20px;
+        font-size: 1rem;
+    }
+}
+
+/* Falling Petals */
+.petal {
+    position: absolute;
+    background-color: #ff4b6e;
+    width: 15px;
+    height: 15px;
+    border-radius: 15px 0 15px 0;
+    top: -20px;
+    opacity: 0.8;
+    z-index: 1000;
+    animation: fall linear forwards;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+#no-btn {
+    background-color: #e0e0e0;
+    color: #555;
+    position: relative;
+    /* Allows it to sit in flow initially */
+}
+
+/* Utility Classes */
+.hidden {
+    display: none;
+}
+
+.heartbeat {
+    animation: heartbeat 1.5s infinite;
+}
+
+@keyframes heartbeat {
+    0% {
+        transform: scale(1);
+    }
+
+    10% {
+        transform: scale(1.1);
+    }
+
+    20% {
+        transform: scale(1);
+    }
+
+    30% {
+        transform: scale(1.1);
+    }
+
+    50% {
+        transform: scale(1);
+    }
+}
+
+#success-container p {
+    font-size: 1.5rem;
+    color: #ff4b6e;
+    margin-top: 1rem;
+    font-weight: bold;
+}
+
+
+/* Burning Effect */
+@keyframes burn {
+    0% {
+        box-shadow:
+            0 0 20px #fefcc9,
+            10px -10px 30px #feec85,
+            -20px -20px 40px #ffae34,
+            20px -40px 50px #ec760c,
+            -20px -60px 60px #cd4606,
+            0 -80px 70px #973716,
+            10px -90px 80px #451b0e;
+    }
+
+    50% {
+        box-shadow:
+            0 0 20px #fefcc9,
+            15px -15px 35px #feec85,
+            -25px -25px 45px #ffae34,
+            25px -45px 55px #ec760c,
+            -25px -65px 65px #cd4606,
+            5px -85px 75px #973716,
+            15px -95px 85px #451b0e;
+    }
+
+    100% {
+        box-shadow:
+            0 0 20px #fefcc9,
+            10px -10px 30px #feec85,
+            -20px -20px 40px #ffae34,
+            20px -40px 50px #ec760c,
+            -20px -60px 60px #cd4606,
+            0 -80px 70px #973716,
+            10px -90px 80px #451b0e;
+    }
+}
+
+.burning {
+    animation: burn 0.5s infinite alternate;
+    border: none !important;
+}
+
+.rose-frame-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    pointer-events: none;
+    overflow: visible;
+}
+
+.rose-icon {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.3));
+}
+
+/* Positioning Corner Roses */
+.tl {
+    top: -25px;
+    left: -25px;
+    transform: rotate(-45deg);
+}
+
+.tl-2 {
+    top: -10px;
+    left: 15px;
+    transform: rotate(0deg) scale(0.7);
+}
+
+.tr {
+    top: -25px;
+    right: -25px;
+    transform: rotate(45deg);
+}
+
+.tr-2 {
+    top: 15px;
+    right: -10px;
+    transform: rotate(180deg) scale(0.7);
+}
+
+.bl {
+    bottom: -25px;
+    left: -25px;
+    transform: rotate(-135deg);
+}
+
+.bl-2 {
+    bottom: 10px;
+    left: -10px;
+    transform: rotate(-90deg) scale(0.7);
+}
+
+.br {
+    bottom: -25px;
+    right: -25px;
+    transform: rotate(135deg);
+}
+
+.br-2 {
+    bottom: -10px;
+    right: 15px;
+    transform: rotate(180deg) scale(0.7);
+}
