@@ -87,6 +87,9 @@ present2.addEventListener('click', () => {
     // Show Envelope Present
     document.getElementById('presents-container').classList.add('hidden');
     document.getElementById('present-2-container').classList.remove('hidden');
+
+    // Start Falling Petals
+    createPetals();
 });
 
 // Envelope Interaction
@@ -95,19 +98,50 @@ envelope.addEventListener('click', () => {
     envelope.classList.toggle('open');
 });
 
+// Present 3 Logic
+const couponText = document.getElementById('coupon-text');
+const generateBtn = document.getElementById('generate-btn');
+
+const coupons = [
+    "🎟️ Free Sungit Pass",
+    "💆‍♀️ 1 Massage",
+    "🍕 You Pick Dinner (I Pay)",
+    "🐛 I'll bath Calcifer",
+    "🍽️ 1 free DJ",
+    "🧸 1 free sorry",
+    "🍦 Ice Cream Date on Me"
+];
+
 present3.addEventListener('click', () => {
-    alert("Nope, not this one! 😉");
+    document.getElementById('presents-container').classList.add('hidden');
+    document.getElementById('present-3-container').classList.remove('hidden');
+    generateCoupon();
+    createPetals();
 });
+
+generateBtn.addEventListener('click', generateCoupon);
+
+function generateCoupon() {
+    // Add a simple animation effect
+    couponText.style.opacity = 0;
+    setTimeout(() => {
+        const randomCoupon = coupons[Math.floor(Math.random() * coupons.length)];
+        couponText.innerText = randomCoupon;
+        couponText.style.opacity = 1;
+    }, 200);
+}
 
 // Global Back Function
 window.goBackToPresents = function () {
     // Hide all possible views
     const successContainer = document.getElementById('success-container');
     const present2Container = document.getElementById('present-2-container');
+    const present3Container = document.getElementById('present-3-container');
     const presentsContainer = document.getElementById('presents-container');
 
     successContainer.classList.add('hidden');
     present2Container.classList.add('hidden');
+    if (present3Container) present3Container.classList.add('hidden');
     presentsContainer.classList.remove('hidden');
 
     // Reset Success State
@@ -179,3 +213,29 @@ function launchConfetti() {
         confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
     }, 250);
 }
+
+function createFloatingHearts() {
+    setInterval(() => {
+        const heart = document.createElement('div');
+        heart.classList.add('floating-heart');
+        heart.innerHTML = '❤️';
+
+        // Randomize positioning
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDuration = Math.random() * 3 + 4 + 's'; // 4-7s float duration
+
+        // Randomize size
+        const size = Math.random() * 20 + 10 + 'px';
+        heart.style.fontSize = size;
+
+        document.body.appendChild(heart);
+
+        // Cleanup
+        setTimeout(() => {
+            heart.remove();
+        }, 8000);
+    }, 400); // New heart every 400ms
+}
+
+// Start floating hearts immediately
+createFloatingHearts();
